@@ -1,0 +1,26 @@
+{
+    "name": "codegyre/phantomshot",
+    "type": "library",
+    "description": "PHP tool to make web-shots using PhantomJS",
+    "keywords": ["webshot"],
+    "homepage": "http://codegyre.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nick Palamarchuk",
+            "email": "lividgreen@codegyre.com"
+        },
+        {
+            "name": "Codegyre developers team",
+            "homepage": "http://codegyre.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": { "Codegyre\\PhantomShot\\": "" }
+    },
+    "target-dir": "Codegyre/PhantomShot",
+    "minimum-stability": "dev"
+}
