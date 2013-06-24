@@ -19,20 +19,38 @@ class WebPage {
     const SIZE_DESKTOP_24 = '1920*1200';
 
     private $url;
+    private $phantomCmd;
 
+    /**
+     * @param $url
+     * @throws \Exception
+     */
     public function __construct($url) {
+        $this->phantomCmd = trim(shell_exec("which phantomjs")," \n\t\r");
+        if (empty($this->phantomCmd)) {
+            throw new \Exception('PhantomJS command is not found');
+        }
         $this->url = $url;
     }
 
+    /**
+     * Make screenshot of web-page
+     *
+     * @param string $destinationFile
+     * @param string $size
+     * @param int $zoomFactor
+     */
     public function getShot($destinationFile, $size = self::SIZE_DESKTOP_19, $zoomFactor = 1) {
+
         $cmdParts = array(
-            'phantomjs', // TODO find phantomjs in system
-            'rasterize.js',
-            escapeshellarg($this->url),
-            escapeshellarg($destinationFile),
-            escapeshellarg($size),
-            escapeshellarg($zoomFactor),
+            $this->phantomCmd,
+            __DIR__.'/rasterize.js',
+            escapeshellcmd($this->url),
+            escapeshellcmd($destinationFile),
+            escapeshellcmd($size),
+            escapeshellcmd($zoomFactor),
         );
-        exec(implode(' ', $cmdParts));
+        $cmd = implode(' ', $cmdParts);
+        shell_exec($cmd);
     }
 }
