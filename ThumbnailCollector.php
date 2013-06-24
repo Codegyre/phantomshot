@@ -12,8 +12,6 @@ class ThumbnailCollector {
     const TRANSFORM_FILL_HEIGHT_MIDDLE = 'fill-height-middle';
     const TRANSFORM_FILL_HEIGHT_RIGHT = 'fill-height-right';
 
-    const TRANSFORM_FILL_RIGHT = 'fill-height-right';
-
     private $image;
     private $sourceWidth;
     private $sourceHeight;
