@@ -3,7 +3,7 @@ var page = require('webpage').create(),
     system = require('system'),
     address, output;
 
-if (system.args.length < 2 || system.args.length > 4) {
+if (system.args.length < 2 || system.args.length > 5) {
     console.log("Usage: phantomjs rasterize.js <web-address> [<output-file=shot.png>] [<viewport-size=1200*800>] [<zoom-factor=1>]");
     phantom.exit();
 }
