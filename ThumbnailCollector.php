@@ -108,27 +108,27 @@ class ThumbnailCollector {
 
         switch ($transform) {
             case self::TRANSFORM_FILL_WIDTH_TOP:
-                imagecopyresized($dstImage, $this->image, 0, $destYTop, 0, $srcYTop, $width, $calculatedDestHeight, $this->sourceWidth, $calculatedSourceHeight);
+                imagecopyresampled($dstImage, $this->image, 0, $destYTop, 0, $srcYTop, $width, $calculatedDestHeight, $this->sourceWidth, $calculatedSourceHeight);
                 break;
             case self::TRANSFORM_FILL_WIDTH_MIDDLE:
-                imagecopyresized($dstImage, $this->image, 0, $destYMiddle, 0, $srcYMiddle, $width, $calculatedDestHeight, $this->sourceWidth, $calculatedSourceHeight);
+                imagecopyresampled($dstImage, $this->image, 0, $destYMiddle, 0, $srcYMiddle, $width, $calculatedDestHeight, $this->sourceWidth, $calculatedSourceHeight);
                 break;
             case self::TRANSFORM_FILL_WIDTH_BOTTOM:
-                imagecopyresized($dstImage, $this->image, 0, $destYBottom, 0, $srcYBottom, $width, $calculatedDestHeight, $this->sourceWidth, $calculatedSourceHeight);
+                imagecopyresampled($dstImage, $this->image, 0, $destYBottom, 0, $srcYBottom, $width, $calculatedDestHeight, $this->sourceWidth, $calculatedSourceHeight);
                 break;
             case self::TRANSFORM_FILL_HEIGHT_LEFT:
-                imagecopyresized($dstImage, $this->image, $destXLeft, 0, $srcXLeft, 0, $calculatedDestWidth, $height, $calculatedSourceWidth, $this->sourceHeight);
+                imagecopyresampled($dstImage, $this->image, $destXLeft, 0, $srcXLeft, 0, $calculatedDestWidth, $height, $calculatedSourceWidth, $this->sourceHeight);
                 break;
             case self::TRANSFORM_FILL_HEIGHT_MIDDLE:
-                imagecopyresized($dstImage, $this->image, $destXMiddle, 0, $srcXMiddle, 0, $calculatedDestWidth, $height, $calculatedSourceWidth, $this->sourceHeight);
+                imagecopyresampled($dstImage, $this->image, $destXMiddle, 0, $srcXMiddle, 0, $calculatedDestWidth, $height, $calculatedSourceWidth, $this->sourceHeight);
                 break;
             case self::TRANSFORM_FILL_HEIGHT_RIGHT:
-                imagecopyresized($dstImage, $this->image, $destXRight, 0, $srcXRight, 0, $calculatedDestWidth, $height, $calculatedSourceWidth, $this->sourceHeight);
+                imagecopyresampled($dstImage, $this->image, $destXRight, 0, $srcXRight, 0, $calculatedDestWidth, $height, $calculatedSourceWidth, $this->sourceHeight);
                 break;
             default:
                 throw new \Exception('Unknown transform');
         }
 
-        imagepng($dstImage, $fileName);
+        imagepng($dstImage, $fileName, 100);
     }
 }
