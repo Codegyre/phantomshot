@@ -129,6 +129,6 @@ class ThumbnailCollector {
                 throw new \Exception('Unknown transform');
         }
 
-        imagepng($dstImage, $fileName, 100);
+        imagepng($dstImage, $fileName);
     }
 }
