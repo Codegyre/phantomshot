@@ -44,6 +44,8 @@ class WebPage {
 
         $cmdParts = array(
             $this->phantomCmd,
+            '--ignore-ssl-errors=yes',
+            '--ssl-protocol=any',
             __DIR__.'/rasterize.js',
             escapeshellcmd($this->url),
             escapeshellcmd($destinationFile),
