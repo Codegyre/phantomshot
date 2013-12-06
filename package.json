@@ -1,0 +1,24 @@
+{
+  "name": "phantomshot",
+  "description": "phantomshot cli + API",
+  "author": "Juho Vepsalainen <bebraw@gmail.com>",
+  "version": "0.1.0",
+  "main": "./rasterize.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CodeGyre/phantomshot.git"
+  },
+  "homepage": "https://github.com/CodeGyre/phantomshot",
+  "bugs": {
+    "url": "https://github.com/CodeGyre/phantomshot/issues"
+  },
+  "keywords": [
+    "screenshot",
+    "screengrab",
+    "phantom"
+  ],
+  "dependencies": {
+    "webshot": "0.7.1",
+    "commander": "~2.1.0"
+  }
+}
