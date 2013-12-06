@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-var fs = require('fs');
-
 var program = require('commander');
-var webshot = require('webshot');
+
+var capture = require('./capture');
 
 
 main();
@@ -21,15 +20,4 @@ function main() {
     if(!program.windowY) program.windowY = 768;
 
     capture(program);
-}
-
-function capture(o) {
-    webshot(o.site, o.output, {
-        windowSize: {
-            x: o.windowX,
-            y: o.windowY
-        }
-    }, function(err) {
-        if(err) return console.error(err);
-    });
 }
