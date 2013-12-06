@@ -1,46 +1,35 @@
-var page = require('webpage').create(),
-    fs = require('fs'),
-    system = require('system'),
-    address, output;
+#!/usr/bin/env node
+var fs = require('fs');
 
-if (system.args.length < 2 || system.args.length > 5) {
-    console.log("Usage: phantomjs rasterize.js <web-address> [<output-file=shot.png>] [<viewport-size=1200*800>] [<zoom-factor=1>]");
-    phantom.exit();
+var program = require('commander');
+var webshot = require('webshot');
+
+
+main();
+
+function main() {
+    program.version(require('./package.json').version).
+        option('-s --site <url>', 'site to capture').
+        option('-o --output <filename>', 'output name, defaults to shot.png').
+        option('-wx --windowX <pixels>', 'window x pixels, defaults to 1024').
+        option('-wy --windowY <pixels>', 'window y pixels, defaults to 768').
+        parse(process.argv);
+
+    if(!program.site) return console.warn('Missing site to capture!');
+    if(!program.output) program.output = 'shot.png';
+    if(!program.windowX) program.windowX = 1024;
+    if(!program.windowY) program.windowY = 768;
+
+    capture(program);
 }
-else {
-    address = system.args[1];
 
-    if (system.args.length > 2) {
-        output = system.args[2];
-    }
-    else {
-        output = 'shot.png';
-    }
-
-    var width = 1200, height = 1024;
-    if (system.args.length > 3) {
-        var size = system.args[3].split('*');
-        width = parseInt(size[0]);
-        height = parseInt(size[1]);
-    }
-    page.viewportSize = { width: width, height: height };
-    page.clipRect = { top: 0, left: 0, width: width, height: height};
-
-    if (system.args.length > 4) {
-        page.zoomFactor = system.args[4];
-    }
-
-    page.open(address, function (status) {
-        if (status !== 'success') {
-            console.log('Unable to load the address! (' + address + ')');
-            phantom.exit();
-        } else {
-            window.setTimeout(function () {
-                page.render(output);
-                console.log('Done!');
-                phantom.exit();
-            }, 200);
+function capture(o) {
+    webshot(o.site, o.output, {
+        windowSize: {
+            x: o.windowX,
+            y: o.windowY
         }
+    }, function(err) {
+        if(err) return console.error(err);
     });
 }
-
