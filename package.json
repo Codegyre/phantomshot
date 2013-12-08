@@ -18,8 +18,8 @@
     "phantom"
   ],
   "dependencies": {
-    "webshot": "0.7.1",
-    "commander": "~2.1.0",
-    "express": "~3.4.6"
+    "webshot": "0.8.0",
+    "commander": "2.1.0",
+    "express": "3.4.6"
   }
 }
