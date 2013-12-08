@@ -2,7 +2,7 @@
     "name": "codegyre/phantomshot",
     "type": "library",
     "description": "PHP tool to make web-shots using PhantomJS",
-    "keywords": ["webshot"],
+    "keywords": ["webshot","pageshot","screenshot"],
     "homepage": "http://codegyre.com",
     "license": "MIT",
     "authors": [
@@ -16,7 +16,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "eloquent/composer-npm-bridge": ">=1.0.1"
     },
     "autoload": {
         "psr-0": { "Codegyre\\PhantomShot\\": "" }

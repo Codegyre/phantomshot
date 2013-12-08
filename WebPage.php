@@ -19,17 +19,12 @@ class WebPage {
     const SIZE_DESKTOP_24 = '1920*1200';
 
     private $url;
-    private $phantomCmd;
 
     /**
      * @param $url
      * @throws \Exception
      */
     public function __construct($url) {
-        $this->phantomCmd = trim(shell_exec("which phantomjs")," \n\t\r");
-        if (empty($this->phantomCmd)) {
-            throw new \Exception('PhantomJS command is not found');
-        }
         $this->url = $url;
     }
 
@@ -41,16 +36,15 @@ class WebPage {
      * @param int $zoomFactor
      */
     public function getShot($destinationFile, $size = self::SIZE_DESKTOP_19, $zoomFactor = 1) {
+        list($width, $height) = explode('*', $size);
 
         $cmdParts = array(
-            $this->phantomCmd,
-            '--ignore-ssl-errors=yes',
-            '--ssl-protocol=any',
-            __DIR__.'/rasterize.js',
-            escapeshellcmd($this->url),
-            escapeshellcmd($destinationFile),
-            escapeshellcmd($size),
-            escapeshellcmd($zoomFactor),
+            __DIR__.'/js/phantomshot.js',
+            '--output='.escapeshellarg($destinationFile),
+            '--width='.escapeshellarg($width),
+            '--height='.escapeshellarg($height),
+            '--zoom='.escapeshellarg($zoomFactor),
+            escapeshellarg($this->url),
         );
         $cmd = implode(' ', $cmdParts);
         shell_exec($cmd);

@@ -1,6 +1,4 @@
 <?php
-require '../WebPage.php';
-require '../ThumbnailCollector.php';
 
 use Codegyre\PhantomShot\ThumbnailCollector;
 
