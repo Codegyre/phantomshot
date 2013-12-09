@@ -21,13 +21,5 @@
     "autoload": {
         "psr-0": { "Codegyre\\PhantomShot\\": "src" }
     },
-    "target-dir": "Codegyre/PhantomShot",
-    "scripts": {
-        "post-install-cmd": [
-            "Codegyre\\PhantomShot\\ComposerHook::hook"
-        ],
-        "post-update-cmd": [
-            "Codegyre\\PhantomShot\\ComposerHook::hook"
-        ]
-    }
+    "target-dir": "Codegyre/PhantomShot"
 }
