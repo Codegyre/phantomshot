@@ -39,7 +39,9 @@ class WebPage {
         list($width, $height) = explode('*', $size);
 
         $cmdParts = array(
-            __DIR__.'/js/phantomshot.js',
+            'cd '.__DIR__,
+            '&&',
+            './js/phantomshot.js',
             '--output='.escapeshellarg($destinationFile),
             '--width='.escapeshellarg($width),
             '--height='.escapeshellarg($height),
