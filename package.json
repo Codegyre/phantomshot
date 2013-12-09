@@ -1,9 +1,13 @@
 {
   "name": "phantomshot",
   "description": "phantomshot cli + API",
-  "author": "Juho Vepsalainen <bebraw@gmail.com>",
+  "author": "Nick Palamarchuk <lividgreen@codegyre.com>",
+  "contributors": [
+      "Juho Vepsalainen <bebraw@gmail.com>",
+      "Codegyre developers team <gyre@codegyre.com> (http://codegyre.com)"
+  ],
   "version": "0.1.0",
-  "main": "./js/phantomshot.js",
+  "main": "./src/js/phantomshot.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:CodeGyre/phantomshot.git"

@@ -1,5 +1,5 @@
-node_modules/
-/.idea
-*.swp
+src/node_modules/
 
+.idea
+*.swp
 composer.phar

@@ -19,7 +19,7 @@
         "php": ">=5.3.3"
     },
     "autoload": {
-        "psr-0": { "Codegyre\\PhantomShot\\": "" }
+        "psr-0": { "Codegyre\\PhantomShot\\": "src" }
     },
     "target-dir": "Codegyre/PhantomShot",
     "scripts": {
