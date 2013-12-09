@@ -14,9 +14,6 @@ function main() {
     // all environments
     app.set('port', process.env.PORT || 3000);
     app.use(express.logger('dev'));
-    //app.use(express.json());
-    //app.use(express.urlencoded());
-    //app.use(express.methodOverride());
     app.use(app.router);
 
     // development only
@@ -32,7 +29,8 @@ function main() {
         capture({
             site: site,
             windowX: req.query.windowX || 1024,
-            windowY: req.query.windowY || 768
+            windowY: req.query.windowY || 768,
+            zoomFactor: req.query.zoomFactor || 1.0
         }, function(err, stream) {
             if(err) return res.send(500, 'Failed to process the site!');
 

@@ -4,9 +4,10 @@ var webshot = require('webshot');
 module.exports = function capture(o, cb) {
     var opts = {
         windowSize: {
-            x: o.windowX,
-            y: o.windowY
-        }
+            width: o.windowX,
+            height: o.windowY
+        },
+        zoomFactor: o.zoomFactor
     };
 
     if(cb) {
