@@ -5,8 +5,6 @@ namespace Codegyre\PhantomShot;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use Symfony\Component\Process\ExecutableFinder;
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
 
 class ComposerHook {
     public static function hook(Event $event) {
@@ -19,7 +17,6 @@ class ComposerHook {
                 break;
             default:
                 return;
-
         }
 
         $executableFinder = new ExecutableFinder;
@@ -28,22 +25,12 @@ class ComposerHook {
             throw new \RuntimeException('Unable to locate npm executable.');
         }
 
-        $processBuilder = new ProcessBuilder(array(
-            $npmPath,
-            $command,
-        ));
-        $processBuilder->setWorkingDirectory(__DIR__);
-        $npmProcess = $processBuilder->getProcess();
+        exec('cd '.escapeshellarg(__DIR__).' && '.$npmPath.' '.$command, $out, $code);
 
         $io = $event->getIO();
-
-        $npmProcess->run(function ($type, $buffer) use ($io) {
-            if (Process::ERR === $type) {
-                throw new \RuntimeException($buffer);
-            } else {
-                $io->write($buffer, false);
-            }
-        });
-   }
-
+        if ($code != 0) {
+            throw new \RuntimeException('Error executing npm: '.$out);
+        }
+        $io->write($out);
+    }
 }

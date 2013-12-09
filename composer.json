@@ -22,5 +22,12 @@
         "psr-0": { "Codegyre\\PhantomShot\\": "" }
     },
     "target-dir": "Codegyre/PhantomShot",
-    "minimum-stability": "dev"
+    "scripts": {
+        "post-install-cmd": [
+            "Codegyre\\PhantomShot\\ComposerHook::hook"
+        ],
+        "post-update-cmd": [
+            "Codegyre\\PhantomShot\\ComposerHook::hook"
+        ]
+    }
 }
