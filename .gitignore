@@ -1,4 +1,4 @@
-src/node_modules/
+src/js/node_modules/
 
 .idea
 *.swp
