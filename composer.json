@@ -16,8 +16,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "eloquent/composer-npm-bridge": ">=1.0.1"
+        "php": ">=5.3.3"
     },
     "autoload": {
         "psr-0": { "Codegyre\\PhantomShot\\": "" }
