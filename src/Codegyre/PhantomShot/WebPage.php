@@ -34,21 +34,41 @@ class WebPage {
      * @param string $destinationFile
      * @param string $size
      * @param int $zoomFactor
+     * @param int $timeout
+     * @param int $delay
+     * @throws \Exception
      */
-    public function getShot($destinationFile, $size = self::SIZE_DESKTOP_19, $zoomFactor = 1) {
+    public function getShot($destinationFile, $size = self::SIZE_DESKTOP_19, $zoomFactor = 1, $timeout = 0, $delay = 0) {
         list($width, $height) = explode('*', $size);
 
         $cmdParts = array(
-            'cd '.__DIR__.'/js',
-            '&&',
             './phantomshot.js',
             '--output='.escapeshellarg($destinationFile),
             '--width='.escapeshellarg($width),
             '--height='.escapeshellarg($height),
             '--zoom='.escapeshellarg($zoomFactor),
+            '--timeout='.escapeshellarg($timeout),
+            '--delay='.escapeshellarg($delay),
             escapeshellarg($this->url),
         );
         $cmd = implode(' ', $cmdParts);
-        shell_exec($cmd);
+
+        $descriptorSpec = array(
+            0 => array("pipe", "r"),
+            1 => array("pipe", "w"),
+            2 => array("pipe", "w"),
+        );
+        $process = proc_open($cmd, $descriptorSpec, $pipes, __DIR__.'/js');
+
+        if (is_resource($process)) {
+            $error = stream_get_contents($pipes[2]);
+            proc_close($process);
+            if (!empty($error)) {
+                throw new \Exception("Webshot creation failed: $error");
+            }
+        }
+        else {
+            throw new \Exception("Can't run phantomshot.js");
+        }
     }
 }

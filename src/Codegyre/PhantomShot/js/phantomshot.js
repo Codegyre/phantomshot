@@ -22,6 +22,16 @@
             default: 1.0,
             describe: 'browser zoom factor'
         })
+        .option('t', {
+            alias: 'timeout',
+            default: 0,
+            describe: 'number of milliseconds to wait before killing the phantomjs process and assuming webshotting has failed. (0 is no timeout.)'
+        })
+        .option('d', {
+            alias: 'delay',
+            default: 0,
+            describe: 'number of milliseconds to wait after a page loads before taking the screenshot'
+        })
         .demand(1)
         .argv;
 
@@ -34,13 +44,16 @@
             width: argv.w,
             height: argv.h
         },
-        zoomFactor: argv.z
+        zoomFactor: argv.z,
+        timeout: argv.t,
+        renderDelay: argv.d
     };
 
     var webshot = require('webshot');
     webshot(argv._.pop(), argv.o, options, function(err) {
         if (err) {
             console.error(err);
+            process.exit(1);
         }
     });
 })();

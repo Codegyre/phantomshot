@@ -20,9 +20,12 @@ class ThumbnailCollector {
      * @param string $url
      * @param string $tmpDir
      * @param string $viewportSize
+     * @param int $zoomFactor
+     * @param int $timeout
+     * @param int $delay
      * @throws \Exception
      */
-    public function __construct($url, $tmpDir = '/tmp', $viewportSize = WebPage::SIZE_NETBOOK_15) {
+    public function __construct($url, $tmpDir = '/tmp', $viewportSize = WebPage::SIZE_NETBOOK_15, $zoomFactor = 1, $timeout = 0, $delay = 0) {
         if (!is_dir($tmpDir) || !is_writable($tmpDir)) {
             throw new \Exception("Destination dir '$tmpDir' must exist and be writable");
         }
@@ -33,7 +36,7 @@ class ThumbnailCollector {
         while(file_exists($tmpFile));
 
         $webPage = new WebPage($url);
-        $webPage->getShot($tmpFile, $viewportSize);
+        $webPage->getShot($tmpFile, $viewportSize, $zoomFactor, $timeout, $delay);
 
         $this->image = imagecreatefrompng($tmpFile);
         unlink($tmpFile);
