@@ -25,7 +25,7 @@ class ComposerHook {
             throw new \RuntimeException('Unable to locate npm executable.');
         }
 
-        exec('cd '.escapeshellarg(__DIR__.'/js').' && '.$npmPath.' '.$command, $out, $code);
+        exec('cd '.escapeshellarg(__DIR__.'/js').' && "' . $npmPath . '" '.escapeshellarg($command), $out, $code);
 
         $io = $event->getIO();
         if ($code != 0) {
